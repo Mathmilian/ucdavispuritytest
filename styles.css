@@ -1,71 +1,193 @@
-:root{
-  --bg1:#0b1020;
-  --bg2:#1b2b55;
-  --card: rgba(255,255,255,.08);
-  --text:#eef2ff;
-  --muted: rgba(238,242,255,.7);
-  --border: rgba(255,255,255,.12);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-*{ box-sizing:border-box; }
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(1200px 600px at 20% 10%, var(--bg2), transparent 60%),
-    radial-gradient(1000px 600px at 80% 30%, #3b1d6a, transparent 55%),
-    linear-gradient(180deg, var(--bg1), #050711);
-  min-height:100vh;
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
 }
 
-.wrap{ max-width: 880px; margin: 0 auto; padding: 28px 18px 48px; }
-.header{ margin-bottom: 18px; }
-.title{ margin:0 0 8px; font-size: 34px; letter-spacing: .2px; }
-.subtitle{ margin:0; color: var(--muted); }
-
-.card{
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
-  backdrop-filter: blur(10px);
-  margin-top: 16px;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    min-height: 100vh;
 }
 
-.toolbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 10px; }
-
-button{
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  padding: 10px 12px;
-  border-radius: 12px;
-  cursor: pointer;
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
-button.primary{ border-color: rgba(255,255,255,.35); }
-button.danger{ border-color: rgba(255,120,120,.45); }
 
-.list{ margin: 0; padding-left: 20px; }
-.item{
-  display:flex;
-  gap: 12px;
-  padding: 10px 6px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #002855; /* UC Davis blue */
 }
-.item:last-child{ border-bottom: none; }
-.item input{ margin-top: 3px; transform: scale(1.15); }
 
-.result .scoreRow{
-  display:flex;
-  justify-content: space-between;
-  gap: 18px;
-  flex-wrap: wrap;
-  align-items: center;
+.logo-container {
+    margin: 20px 0;
 }
-.scoreLabel{ color: var(--muted); font-size: 13px; }
-.scoreValue{ font-size: 44px; font-weight: 750; line-height: 1; margin-top: 6px; }
-.meta{ color: var(--muted); margin-top: 6px; }
-.actions{ display:flex; gap: 10px; flex-wrap: wrap; }
 
-.fineprint{ color: var(--muted); margin: 14px 0 0; font-size: 12px; }
+.aggie-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+.intro-text {
+    margin: 30px 0;
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+.intro-text em {
+    font-style: italic;
+}
+
+.warning {
+    margin-top: 20px;
+    color: #d9534f;
+}
+
+.instructions {
+    margin: 25px 0;
+    font-size: 1.1em;
+}
+
+.score-display {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #002855; /* UC Davis blue */
+    color: white;
+    border-radius: 8px;
+}
+
+.score-display h2 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+#score {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+main {
+    margin-top: 30px;
+}
+
+#purity-test {
+    width: 100%;
+}
+
+.question {
+    margin: 15px 0;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.question:hover {
+    background-color: #e8e8e8;
+}
+
+.question input[type="checkbox"] {
+    margin-right: 12px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.question label {
+    cursor: pointer;
+    font-size: 1.05em;
+    display: inline;
+    vertical-align: middle;
+}
+
+.question input[type="checkbox"]:checked + label {
+    color: #999;
+    text-decoration: line-through;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+footer a {
+    color: #002855;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .intro-text {
+        font-size: 0.95em;
+    }
+
+    .score-display h2 {
+        font-size: 1.5em;
+    }
+
+    .question label {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6em;
+    }
+
+    .aggie-logo {
+        max-width: 150px;
+    }
+
+    .intro-text {
+        font-size: 0.9em;
+        line-height: 1.6;
+    }
+
+    .intro-text br {
+        display: none;
+    }
+
+    .score-display {
+        padding: 15px;
+    }
+
+    .score-display h2 {
+        font-size: 1.3em;
+    }
+
+    .question {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .question label {
+        font-size: 0.95em;
+    }
+}
