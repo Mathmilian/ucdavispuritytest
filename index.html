@@ -1,45 +1,554 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UCDavis Purity Test</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The UC Davis Purity Test</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="wrap">
-    <header class="header">
-      <h1 class="title">UCDavis Purity Test</h1>
-      <p class="subtitle">Check what you’ve done. Score = 100 − checked items.</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>The UC Davis Purity Test</h1>
+            
+            <div class="logo-container">
+                <a href="https://theaggie.org" target="_blank">
+                    <img src="aggie-logo.png" alt="The California Aggie Logo" class="aggie-logo">
+                </a>
+            </div>
 
-    <section class="card">
-      <div class="toolbar">
-        <button id="checkAll" type="button">Check all</button>
-        <button id="uncheckAll" type="button">Uncheck all</button>
-        <button id="reset" type="button" class="danger">Reset</button>
-      </div>
+            <div class="intro-text">
+                <p><em>The Purity Test has historically served as a segue from orientation to true college life at UC Davis.<br>
+                It's a voluntary opportunity for orientation groups to bond, and for students to track the maturation<br>
+                of their experiences throughout college.</em></p>
+                
+                <p class="warning"><strong>Caution: This is not a bucket list. Completion of all items on this test will likely result in death.</strong></p>
+            </div>
 
-      <ol id="list" class="list"></ol>
-    </section>
+            <div class="instructions">
+                <p>Click on every item you have done.<br>
+                MPS stands for Member of the Preferred Sex.</p>
+            </div>
 
-    <section class="card result">
-      <div class="scoreRow">
-        <div>
-          <div class="scoreLabel">Your score</div>
-          <div id="score" class="scoreValue">—</div>
-          <div id="meta" class="meta"></div>
-        </div>
+            <div class="score-display">
+                <h2>Your Purity Score: <span id="score">100</span></h2>
+            </div>
+        </header>
 
-        <div class="actions">
-          <button id="calc" type="button" class="primary">Calculate</button>
-          <button id="copy" type="button">Copy result text</button>
-        </div>
-      </div>
-      <p class="fineprint">No account, no server. Your answers stay in your browser.</p>
-    </section>
-  </main>
+        <main>
+            <form id="purity-test">
+                <div class="question">
+                    <input type="checkbox" id="q1" name="q1">
+                    <label for="q1">1. Submitted your Purity Score stories on social media?</label>
+                </div>
 
-  <script src="app.js"></script>
+                <div class="question">
+                    <input type="checkbox" id="q2" name="q2">
+                    <label for="q2">2. Held hands romantically?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q3" name="q3">
+                    <label for="q3">3. Been on a date?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q4" name="q4">
+                    <label for="q4">4. Been in a relationship?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q5" name="q5">
+                    <label for="q5">5. Danced without leaving room for Jesus?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q6" name="q6">
+                    <label for="q6">6. Kissed a non-family member?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q7" name="q7">
+                    <label for="q7">7. Kissed a non-family member on the lips?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q8" name="q8">
+                    <label for="q8">8. French kissed?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q9" name="q9">
+                    <label for="q9">9. French kissed in public?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q10" name="q10">
+                    <label for="q10">10. Kissed on the neck?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q11" name="q11">
+                    <label for="q11">11. Kissed horizontally?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q12" name="q12">
+                    <label for="q12">12. Given or received a hickey?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q13" name="q13">
+                    <label for="q13">13. Kissed or been kissed on the breast?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q14" name="q14">
+                    <label for="q14">14. Kissed someone below the belt?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q15" name="q15">
+                    <label for="q15">15. Kissed for more than two hours consecutively?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q16" name="q16">
+                    <label for="q16">16. Played a game involving stripping?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q17" name="q17">
+                    <label for="q17">17. Seen or been seen by another person in a sensual context?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q18" name="q18">
+                    <label for="q18">18. Masturbated?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q19" name="q19">
+                    <label for="q19">19. Masturbated to a picture or video?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q20" name="q20">
+                    <label for="q20">20. Masturbated while someone else was in the room?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q21" name="q21">
+                    <label for="q21">21. Been caught masturbating?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q22" name="q22">
+                    <label for="q22">22. Masturbated with an inanimate object?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q23" name="q23">
+                    <label for="q23">23. Seen or read pornographic material?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q24" name="q24">
+                    <label for="q24">24. Massaged or been massaged sensually?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q25" name="q25">
+                    <label for="q25">25. Gone through the motions of intercourse while fully dressed?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q26" name="q26">
+                    <label for="q26">26. Undressed or been undressed by a MPS (member of the preferred sex)?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q27" name="q27">
+                    <label for="q27">27. Showered with a MPS?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q28" name="q28">
+                    <label for="q28">28. Fondled or had your butt cheeks fondled?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q29" name="q29">
+                    <label for="q29">29. Fondled or had your breasts fondled?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q30" name="q30">
+                    <label for="q30">30. Fondled or had your genitals fondled?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q31" name="q31">
+                    <label for="q31">31. Had or given "blue balls"?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q32" name="q32">
+                    <label for="q32">32. Had an orgasm due to someone else's manipulation?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q33" name="q33">
+                    <label for="q33">33. Sent a sexually explicit text or instant message?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q34" name="q34">
+                    <label for="q34">34. Sent or received sexually explicit photographs?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q35" name="q35">
+                    <label for="q35">35. Engaged in sexually explicit activity over video chat?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q36" name="q36">
+                    <label for="q36">36. Cheated on a significant other during a relationship?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q37" name="q37">
+                    <label for="q37">37. Purchased contraceptives?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q38" name="q38">
+                    <label for="q38">38. Gave oral sex?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q39" name="q39">
+                    <label for="q39">39. Received oral sex?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q40" name="q40">
+                    <label for="q40">40. Ingested someone else's genital secretion?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q41" name="q41">
+                    <label for="q41">41. Used a sex toy with a partner?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q42" name="q42">
+                    <label for="q42">42. Spent the night with a MPS?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q43" name="q43">
+                    <label for="q43">43. Been walked in on while engaging in a sexual act?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q44" name="q44">
+                    <label for="q44">44. Kicked a roommate out to commit a sexual act?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q45" name="q45">
+                    <label for="q45">45. Ingested alcohol in a non-religious context?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q46" name="q46">
+                    <label for="q46">46. Played a drinking game?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q47" name="q47">
+                    <label for="q47">47. Been drunk?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q48" name="q48">
+                    <label for="q48">48. Faked sobriety to parents or teachers?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q49" name="q49">
+                    <label for="q49">49. Had severe memory loss due to alcohol?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q50" name="q50">
+                    <label for="q50">50. Used tobacco?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q51" name="q51">
+                    <label for="q51">51. Used marijuana?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q52" name="q52">
+                    <label for="q52">52. Used a drug stronger than marijuana?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q53" name="q53">
+                    <label for="q53">53. Used methamphetamine, crack cocaine, PCP, horse tranquilizers or heroin?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q54" name="q54">
+                    <label for="q54">54. Been sent to the office of a principal, dean or judicial affairs representative for a disciplinary infraction?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q55" name="q55">
+                    <label for="q55">55. Been put on disciplinary probation or suspended?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q56" name="q56">
+                    <label for="q56">56. Urinated in public?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q57" name="q57">
+                    <label for="q57">57. Gone skinny-dipping?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q58" name="q58">
+                    <label for="q58">58. Gone streaking?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q59" name="q59">
+                    <label for="q59">59. Seen a stripper?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q60" name="q60">
+                    <label for="q60">60. Had the police called on you?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q61" name="q61">
+                    <label for="q61">61. Run from the police?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q62" name="q62">
+                    <label for="q62">62. Had the police question you?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q63" name="q63">
+                    <label for="q63">63. Had the police handcuff you?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q64" name="q64">
+                    <label for="q64">64. Been arrested?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q65" name="q65">
+                    <label for="q65">65. Been convicted of a crime?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q66" name="q66">
+                    <label for="q66">66. Been convicted of a felony?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q67" name="q67">
+                    <label for="q67">67. Committed an act of vandalism?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q68" name="q68">
+                    <label for="q68">68. Had sexual intercourse?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q69" name="q69">
+                    <label for="q69">69. Had sexual intercourse three or more times in one night?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q70" name="q70">
+                    <label for="q70">70. ?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q71" name="q71">
+                    <label for="q71">71. Had sexual intercourse 10 or more times?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q72" name="q72">
+                    <label for="q72">72. Had sexual intercourse in four or more positions?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q73" name="q73">
+                    <label for="q73">73. Had sexual intercourse with a stranger or person you met within 24 hours?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q74" name="q74">
+                    <label for="q74">74. Had sexual intercourse in a motor vehicle?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q75" name="q75">
+                    <label for="q75">75. Had sexual intercourse outdoors?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q76" name="q76">
+                    <label for="q76">76. Had sexual intercourse in public?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q77" name="q77">
+                    <label for="q77">77. Had sexual intercourse in a swimming pool or hot tub?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q78" name="q78">
+                    <label for="q78">78. Had sexual intercourse in a bed not belonging to you or your partner?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q79" name="q79">
+                    <label for="q79">79. Had sexual intercourse while you or your partner's parents were in the same home?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q80" name="q80">
+                    <label for="q80">80. Had sexual intercourse with non-participating third party in the same room?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q81" name="q81">
+                    <label for="q81">81. Joined the mile high club?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q82" name="q82">
+                    <label for="q82">82. Participated in a "booty call" with a partner whom you were not in a relationship with?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q83" name="q83">
+                    <label for="q83">83. Traveled 100 or more miles for the primary purpose of sexual intercourse?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q84" name="q84">
+                    <label for="q84">84. Had sexual intercourse with a partner with a 3 or more year age difference?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q85" name="q85">
+                    <label for="q85">85. Had sexual intercourse with a virgin?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q86" name="q86">
+                    <label for="q86">86. Had sexual intercourse without a condom?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q87" name="q87">
+                    <label for="q87">87. Had a STI test due to reasonable suspicion?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q88" name="q88">
+                    <label for="q88">88. Had a STI?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q89" name="q89">
+                    <label for="q89">89. Had a threesome?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q90" name="q90">
+                    <label for="q90">90. Attended an orgy?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q91" name="q91">
+                    <label for="q91">91. Had two or more distinct acts of sexual intercourse with two or more people within 24 hours?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q92" name="q92">
+                    <label for="q92">92. Had sexual intercourse with five or more partners?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q93" name="q93">
+                    <label for="q93">93. Been photographed or filmed during sexual intercourse by yourself or others?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q94" name="q94">
+                    <label for="q94">94. Had period sex?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q95" name="q95">
+                    <label for="q95">95. Had anal sex?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q96" name="q96">
+                    <label for="q96">96. Had a pregnancy scare?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q97" name="q97">
+                    <label for="q97">97. Impregnated someone or been impregnated?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q98" name="q98">
+                    <label for="q98">98. Paid or been paid for a sexual act?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q99" name="q99">
+                    <label for="q99">99. Committed an act of voyeurism?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q100" name="q100">
+                    <label for="q100">100. Committed an act of incest?</label>
+                </div>
+
+                <div class="question">
+                    <input type="checkbox" id="q101" name="q101">
+                    <label for="q101">101. Engaged in bestiality?</label>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <a href="privacy.html">Privacy Policy</a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
