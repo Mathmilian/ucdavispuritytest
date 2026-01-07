@@ -1,117 +1,91 @@
-// Replace these with *your* UC Davis questions.
-// (I’m keeping these generic as an example starter.)
+// IMPORTANT: Write your own list. Don't copy a site's list verbatim.
 const QUESTIONS = [
-  "Went to a campus event you didn’t have to attend?",
-  "Pulled an all-nighter for a deadline?",
-  "Missed a class because you overslept?",
-  "Got lost trying to find a lecture hall?",
-  "Spent way too much on boba or coffee?",
-  "Made a friend in a random line (food, club, etc.)?",
-  "Changed your major (or seriously considered it)?",
-  "Cried or stress-laughed during finals week?",
-  "Been to a party you didn’t really want to go to?",
-  "Had a ‘this is so college’ moment?"
+  "Pulled an all-nighter for an exam",
+  "Gone to a campus event alone",
+  "Joined a club and actually showed up",
+  "Taken a spontaneous day trip",
+  "Been to a concert",
+  "Ate something questionable at 2am",
+  "Missed a bus/train and improvised",
+  "Had a roommate story you’ll never forget",
+  "Attended a party you weren’t sure you’d stay at",
+  "Made a new friend in a random place",
 ];
 
-const els = {
-  list: document.getElementById("questionList"),
-  checkedCount: document.getElementById("checkedCount"),
-  totalCount: document.getElementById("totalCount"),
-  btnScore: document.getElementById("btnScore"),
-  btnCopyLink: document.getElementById("btnCopyLink"),
-  btnCheckAll: document.getElementById("btnCheckAll"),
-  btnUncheckAll: document.getElementById("btnUncheckAll"),
-  result: document.getElementById("result"),
-  scoreValue: document.getElementById("scoreValue"),
-};
+const STORAGE_KEY = "ucdavis_purity_state_v1";
 
-function renderQuestions() {
-  els.totalCount.textContent = String(QUESTIONS.length);
+const listEl = document.getElementById("list");
+const scoreEl = document.getElementById("score");
+const metaEl = document.getElementById("meta");
 
-  const frag = document.createDocumentFragment();
-  QUESTIONS.forEach((text, idx) => {
+function render() {
+  listEl.innerHTML = "";
+  QUESTIONS.forEach((q, idx) => {
     const li = document.createElement("li");
-    const row = document.createElement("label");
-    row.className = "qrow";
-
-    const cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.name = `q${idx}`;
-    cb.addEventListener("change", updateCount);
-
-    const span = document.createElement("span");
-    span.textContent = text;
-
-    row.appendChild(cb);
-    row.appendChild(span);
-    li.appendChild(row);
-    frag.appendChild(li);
+    li.className = "item";
+    li.innerHTML = `
+      <input type="checkbox" id="q${idx}" data-i="${idx}">
+      <label for="q${idx}">${q}</label>
+    `;
+    listEl.appendChild(li);
   });
-
-  els.list.appendChild(frag);
-  updateCount();
 }
 
-function getChecked() {
-  return [...els.list.querySelectorAll("input[type='checkbox']")]
-    .filter(cb => cb.checked).length;
+function getBoxes() {
+  return Array.from(document.querySelectorAll('input[type="checkbox"][data-i]'));
 }
 
-function updateCount() {
-  els.checkedCount.textContent = String(getChecked());
-}
-
-function calcScore() {
-  // Classic scoring style: 100 - checked (or use QUESTIONS.length - checked)
-  const checked = getChecked();
-  const score = Math.max(0, 100 - checked);
-  return score;
-}
-
-function showScore() {
-  const score = calcScore();
-  els.scoreValue.textContent = String(score);
-  els.result.hidden = false;
-
-  // Put score in URL so you can share
-  const url = new URL(window.location.href);
-  url.searchParams.set("score", String(score));
-  window.history.replaceState({}, "", url);
-}
-
-async function copyResultLink() {
-  // Copies current URL (which includes ?score=)
-  const url = window.location.href;
+function loadState() {
   try {
-    await navigator.clipboard.writeText(url);
-    els.btnCopyLink.textContent = "Copied!";
-    setTimeout(() => (els.btnCopyLink.textContent = "Copy result link"), 1200);
-  } catch {
-    // Fallback
-    prompt("Copy this link:", url);
-  }
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const state = JSON.parse(raw);
+    getBoxes().forEach((b, i) => b.checked = !!state[i]);
+  } catch {}
 }
 
-function setAll(checked) {
-  els.list.querySelectorAll("input[type='checkbox']").forEach(cb => {
-    cb.checked = checked;
-  });
-  updateCount();
+function saveState() {
+  const state = getBoxes().map(b => b.checked);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-function loadScoreFromUrl() {
-  const url = new URL(window.location.href);
-  const score = url.searchParams.get("score");
-  if (score !== null) {
-    els.scoreValue.textContent = score;
-    els.result.hidden = false;
-  }
+function calculate() {
+  const checked = getBoxes().filter(b => b.checked).length;
+  const score = Math.max(0, 100 - checked);
+  scoreEl.textContent = String(score);
+  metaEl.textContent = `${checked} checked out of ${QUESTIONS.length}`;
+  saveState();
+  return { score, checked };
 }
 
-els.btnScore.addEventListener("click", showScore);
-els.btnCopyLink.addEventListener("click", copyResultLink);
-els.btnCheckAll.addEventListener("click", () => setAll(true));
-els.btnUncheckAll.addEventListener("click", () => setAll(false));
+function setAll(val) {
+  getBoxes().forEach(b => b.checked = val);
+  calculate();
+}
 
-renderQuestions();
-loadScoreFromUrl();
+function resetAll() {
+  setAll(false);
+  localStorage.removeItem(STORAGE_KEY);
+  scoreEl.textContent = "—";
+  metaEl.textContent = "";
+}
+
+document.getElementById("calc").addEventListener("click", calculate);
+document.getElementById("checkAll").addEventListener("click", () => setAll(true));
+document.getElementById("uncheckAll").addEventListener("click", () => setAll(false));
+document.getElementById("reset").addEventListener("click", resetAll);
+
+document.getElementById("copy").addEventListener("click", async () => {
+  const { score, checked } = calculate();
+  const text = `I got ${score} (${checked}/${QUESTIONS.length} checked) on the UCDavis Purity Test.`;
+  try { await navigator.clipboard.writeText(text); alert("Copied!"); }
+  catch { prompt("Copy:", text); }
+});
+
+document.addEventListener("change", (e) => {
+  if (e.target.matches('input[type="checkbox"][data-i]')) calculate();
+});
+
+render();
+loadState();
+calculate();
