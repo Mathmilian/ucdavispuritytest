@@ -1,118 +1,53 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Purity Test</title>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.4; }
-    .wrap { max-width: 760px; margin: 0 auto; }
-    h1 { margin: 0 0 6px; }
-    .muted { opacity: 0.7; margin: 0 0 18px; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin: 14px 0; }
-    .q { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #eee; }
-    .q:last-child { border-bottom: 0; }
-    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
-    button.primary { border-color: #111; }
-    .result { font-size: 18px; font-weight: 600; }
-    .small { font-size: 13px; opacity: .75; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1>My Purity Test</h1>
-    <p class="muted">Check anything you’ve done. Your score = 100 − (checked items).</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>UC Davis Purity Test</title>
+    <meta name="description" content="A fun, unofficial purity test for UC Davis." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-    <div class="card" id="questions"></div>
+  <body>
+    <main class="wrap">
+      <header class="header">
+        <h1 id="pageTitle">UC Davis Purity Test</h1>
+        <p class="sub">
+          Check every item you’ve done. This is just for fun.
+        </p>
+      </header>
 
-    <div class="card">
-      <div class="result" id="result">Score: —</div>
-      <div class="small" id="detail"></div>
-      <div class="actions">
-        <button class="primary" id="calc">Calculate score</button>
-        <button id="reset">Reset</button>
-        <button id="share">Copy share text</button>
-      </div>
-    </div>
-  </div>
+      <section class="card">
+        <div class="controls">
+          <button id="btnCheckAll" type="button">Check all</button>
+          <button id="btnUncheckAll" type="button">Uncheck all</button>
+          <div class="count">
+            Checked: <span id="checkedCount">0</span>/<span id="totalCount">0</span>
+          </div>
+        </div>
 
-  <script>
-    // Put your own items here (recommended: write your own wording, don’t copy a list verbatim)
-    const ITEMS = [
-      "Stayed out past 2am",
-      "Been on a blind date",
-      "Kissed someone",
-      "Traveled solo",
-      "Got a tattoo or piercing",
-      "Skipped class/work for fun",
-      "Been on a road trip with friends",
-      "Had a crush on someone you shouldn’t have",
-      "Sang karaoke in public",
-      "Danced on a dance floor",
-    ];
+        <ol id="questionList" class="questions"></ol>
 
-    const qs = document.getElementById("questions");
-    ITEMS.forEach((text, i) => {
-      const row = document.createElement("label");
-      row.className = "q";
-      row.innerHTML = `
-        <input type="checkbox" data-i="${i}" />
-        <div><strong>${i + 1}.</strong> ${text}</div>
-      `;
-      qs.appendChild(row);
-    });
+        <div class="actions">
+          <button id="btnScore" type="button" class="primary">Calculate score</button>
+          <button id="btnCopyLink" type="button">Copy result link</button>
+        </div>
 
-    function getCheckedCount() {
-      return [...document.querySelectorAll('input[type="checkbox"]')].filter(x => x.checked).length;
-    }
+        <div id="result" class="result" hidden>
+          <h2>Your score: <span id="scoreValue">—</span></h2>
+          <p class="hint">
+            Higher score = fewer items checked. Lower score = more items checked.
+          </p>
+        </div>
+      </section>
 
-    function calculate() {
-      const checked = getCheckedCount();
-      const score = Math.max(0, 100 - checked);
-      document.getElementById("result").textContent = `Score: ${score}`;
-      document.getElementById("detail").textContent = `${checked} checked out of ${ITEMS.length}`;
-      // Save selection so it persists on refresh
-      const state = [...document.querySelectorAll('input[type="checkbox"]')].map(x => x.checked);
-      localStorage.setItem("my_purity_state", JSON.stringify(state));
-    }
+      <footer class="footer">
+        <small>
+          Unofficial fan project. Not affiliated with UC Davis or Rice University.
+        </small>
+      </footer>
+    </main>
 
-    function load() {
-      const raw = localStorage.getItem("my_purity_state");
-      if (!raw) return;
-      const state = JSON.parse(raw);
-      document.querySelectorAll('input[type="checkbox"]').forEach((x, idx) => {
-        x.checked = !!state[idx];
-      });
-      calculate();
-    }
-
-    document.getElementById("calc").addEventListener("click", calculate);
-    document.getElementById("reset").addEventListener("click", () => {
-      document.querySelectorAll('input[type="checkbox"]').forEach(x => x.checked = false);
-      localStorage.removeItem("my_purity_state");
-      document.getElementById("result").textContent = "Score: —";
-      document.getElementById("detail").textContent = "";
-    });
-
-    document.getElementById("share").addEventListener("click", async () => {
-      const checked = getCheckedCount();
-      const score = Math.max(0, 100 - checked);
-      const text = `I got ${score} on My Purity Test (${checked}/${ITEMS.length} checked).`;
-      try {
-        await navigator.clipboard.writeText(text);
-        alert("Copied!");
-      } catch {
-        prompt("Copy this:", text);
-      }
-    });
-
-    // Auto-save on change
-    document.addEventListener("change", (e) => {
-      if (e.target.matches('input[type="checkbox"]')) calculate();
-    });
-
-    load();
-  </script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
