@@ -1,0 +1,122 @@
+:root{
+  /* ✅ CHANGE THESE TWO AND YOU “reskin” the whole site */
+  --bg: #f4f1ea;                 /* background color */
+  --bg-image: none;              /* e.g. url("bg.jpg") */
+  --title: "UC Davis Purity Test"; /* used only if you want to set via JS */
+
+  --text: #111;
+  --muted: #555;
+  --card: #fff;
+  --border: rgba(0,0,0,.12);
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --link: #1a56db;
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color: var(--text);
+  background: var(--bg);
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-attachment: fixed;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrap{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
+}
+
+.header h1{
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.02em;
+}
+.sub{
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.controls{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.count{
+  margin-left:auto;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+button{
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+button:hover{ filter: brightness(0.98); }
+button:active{ transform: translateY(1px); }
+
+.primary{
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.questions{
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+.questions li{
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.questions li:last-child{ border-bottom: none; }
+
+.qrow{
+  display:flex;
+  gap: 10px;
+  align-items:flex-start;
+}
+.qrow input{ margin-top: 3px; }
+
+.actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.result{
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0,0,0,.10);
+}
+.result h2{
+  margin: 0 0 6px;
+}
+.hint{
+  margin: 0;
+  color: var(--muted);
+}
+
+.footer{
+  margin-top: 16px;
+  color: var(--muted);
+}
