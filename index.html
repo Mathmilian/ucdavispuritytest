@@ -1,53 +1,45 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>UC Davis Purity Test</title>
-    <meta name="description" content="A fun, unofficial purity test for UC Davis." />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UCDavis Purity Test</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <h1 class="title">UCDavis Purity Test</h1>
+      <p class="subtitle">Check what you’ve done. Score = 100 − checked items.</p>
+    </header>
 
-  <body>
-    <main class="wrap">
-      <header class="header">
-        <h1 id="pageTitle">UC Davis Purity Test</h1>
-        <p class="sub">
-          Check every item you’ve done. This is just for fun.
-        </p>
-      </header>
+    <section class="card">
+      <div class="toolbar">
+        <button id="checkAll" type="button">Check all</button>
+        <button id="uncheckAll" type="button">Uncheck all</button>
+        <button id="reset" type="button" class="danger">Reset</button>
+      </div>
 
-      <section class="card">
-        <div class="controls">
-          <button id="btnCheckAll" type="button">Check all</button>
-          <button id="btnUncheckAll" type="button">Uncheck all</button>
-          <div class="count">
-            Checked: <span id="checkedCount">0</span>/<span id="totalCount">0</span>
-          </div>
+      <ol id="list" class="list"></ol>
+    </section>
+
+    <section class="card result">
+      <div class="scoreRow">
+        <div>
+          <div class="scoreLabel">Your score</div>
+          <div id="score" class="scoreValue">—</div>
+          <div id="meta" class="meta"></div>
         </div>
-
-        <ol id="questionList" class="questions"></ol>
 
         <div class="actions">
-          <button id="btnScore" type="button" class="primary">Calculate score</button>
-          <button id="btnCopyLink" type="button">Copy result link</button>
+          <button id="calc" type="button" class="primary">Calculate</button>
+          <button id="copy" type="button">Copy result text</button>
         </div>
+      </div>
+      <p class="fineprint">No account, no server. Your answers stay in your browser.</p>
+    </section>
+  </main>
 
-        <div id="result" class="result" hidden>
-          <h2>Your score: <span id="scoreValue">—</span></h2>
-          <p class="hint">
-            Higher score = fewer items checked. Lower score = more items checked.
-          </p>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <small>
-          Unofficial fan project. Not affiliated with UC Davis or Rice University.
-        </small>
-      </footer>
-    </main>
-
-    <script src="app.js"></script>
-  </body>
+  <script src="app.js"></script>
+</body>
 </html>
